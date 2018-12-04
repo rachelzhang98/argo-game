@@ -1,0 +1,57 @@
+import javax.swing.*; 
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+public class ArgoGUI{
+  
+
+  public static void main(String[] args){
+    
+    //set up jframe
+    JFrame frame = new JFrame ("Argo Game");
+    frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE); 
+    //frame.setLocationRelativeTo(null);
+    frame.setPreferredSize(new Dimension(1200, 700));
+    frame.pack(); 
+    
+    
+    SaveImage i = new SaveImage();
+    
+    JPanel main = new JPanel();
+   JPanel InfoPanel = new JPanel();
+   JPanel MapPanel = new JPanel();
+   
+   InfoPanel.setPreferredSize(new Dimension(800,1200));
+   MapPanel.setPreferredSize(new Dimension(360,180));
+   
+   main.setPreferredSize(new Dimension(1600,700));
+   main.setLayout(new BorderLayout());
+   InfoPanel.add(new JLabel(i.getTempImage()));
+   InfoPanel.add(new JLabel(i.getSalImage()));
+   
+   JScrollPane scroll = new JScrollPane(InfoPanel);
+   scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+   scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+   scroll.setBounds(0, 0, 800, 600);
+   
+   MapPanel.add(new JLabel(i.getMap()));
+   MapPanel.addMouseListener(new MouseAdapter() {
+      public void mouseClicked(MouseEvent me)
+      {
+        System.out.print(me.getX()+" ");
+        System.out.println(me.getY());
+      }
+    });
+    
+    main.add(scroll,BorderLayout.WEST);
+   main.add(MapPanel,BorderLayout.EAST);
+   frame.getContentPane().add(main);
+    frame.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+      
+      frame.setVisible(true);    
+   }
+}
+
